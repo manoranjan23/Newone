@@ -27,3 +27,10 @@ async def logger(client, message, _):
         await message.reply_text(_["log_3"])
     else:
         await message.reply_text(usage)
+import logging
+
+LOGGER = logging.getLogger("AnonX")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
