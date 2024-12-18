@@ -1,19 +1,14 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo import MongoClient
-import config
-from ..logging import LOGGER  # নিশ্চিত করুন সঠিক ইমপোর্ট হয়েছে
 
+from config import MONGO_DB_URI
+
+from ..logging import LOGGER
+
+LOGGER(__name__).info("Connecting to your Mongo Database...")
 try:
-    # MongoDB Async ক্লায়েন্ট
-    _mongo_async_ = AsyncIOMotorClient(config.MONGO_DB_URI)
-    mongodb = _mongo_async_.get_database("Anon")
-
-    # MongoDB Sync ক্লায়েন্ট
-    _mongo_sync_ = MongoClient(config.MONGO_DB_URI)
-    pymongodb = _mongo_sync_.get_database("Anon")
-
-    LOGGER.info("Successfully connected to MongoDB.")  # লগ মেসেজ
-
-except Exception as e:
-    LOGGER.error(f"Failed to connect to MongoDB: {e}")  # ত্রুটি লগ
-    raise
+    _mongo_async_ = AsyncIOMotorClient(MONGO_DB_URI)
+    mongodb = _mongo_async_.Anon
+    LOGGER(__name__).info("Connected to your Mongo Database.")
+except:
+    LOGGER(__name__).error("Failed to connect to your Mongo Database.")
+    exit()
